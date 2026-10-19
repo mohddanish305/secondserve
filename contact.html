@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us & FAQ — Second Serve NGO</title>
+  <meta name="description" content="Reach our 24/7 emergency food rescue helpline, enquire about CSR partnerships, shelter food requests, or explore our frequently asked questions.">
+  <link rel="canonical" href="https://second-serve.org/contact.html">
+
+  <meta property="og:title" content="Contact Us & FAQ — Second Serve">
+  <meta property="og:description" content="Contact our city operations dispatchers, partner with our food rescue network, or find quick answers.">
+  <meta property="og:image" content="images/og-cover.jpg">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" role="banner">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand" aria-label="Second Serve Home">
+        <img src="images/logo.svg" alt="Second Serve Logo" width="180" height="44">
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+          <li><a href="impact.html" class="nav-link">Impact</a></li>
+          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="contact.html" class="nav-link is-active">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="report-food.html" class="btn btn-primary btn-small">Report Surplus Food</a>
+        <div class="nav-auth">
+          <a href="login.html" class="nav-auth-link">Log in</a>
+          <a href="signup.html" class="btn btn-secondary btn-small">Sign up</a>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="how-it-works.html" class="mobile-nav-link">How It Works</a></li>
+        <li><a href="impact.html" class="mobile-nav-link">Impact</a></li>
+        <li><a href="volunteer.html" class="mobile-nav-link">Volunteer</a></li>
+        <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+        <li><a href="contact.html" class="mobile-nav-link is-active">Contact</a></li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="report-food.html" class="btn btn-primary btn-block">Report Surplus Food</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Connect & Collaborate</span>
+        <h1>Get in Touch with Second Serve</h1>
+        <p>Whether you need emergency surplus collection, want to explore a corporate CSR grant, or run a night shelter, we are here to support you.</p>
+      </div>
+    </section>
+
+    <!-- Two-Column Contact Section (TRD §4.7) -->
+    <section class="section section-cream">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start;" class="contact-grid">
+
+          <!-- Left Column: Contact Form -->
+          <div class="form-card" id="contact-form-card">
+            <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Send Us a Message</h2>
+            <p style="font-size: 0.95rem; color: var(--ink-light); margin-bottom: 1.75rem;">
+              Fill in the form below and our team will get back to you within 24 hours.
+            </p>
+
+            <!-- Success Panel -->
+            <div id="contact-success-panel" class="banner banner-success" style="display: none; padding: 1.5rem;" role="alert">
+              <div>✅</div>
+              <div>
+                <strong>Thank you for contacting Second Serve!</strong>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem;">Your message has been logged with our coordinator team. We will respond promptly via email.</p>
+              </div>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="contact-error-banner" class="banner banner-error" style="display: none;" role="alert">
+              <div>⚠️</div>
+              <div>Could not submit message. Please try again or call our helpline at 1800-890-4422.</div>
+            </div>
+
+            <form id="contact-form" novalidate>
+              <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+              <div class="form-grid">
+                <!-- Name -->
+                <div class="form-group">
+                  <label for="contact_name" class="form-label">Full Name <span class="req">*</span></label>
+                  <input type="text" id="contact_name" name="contact_name" class="form-input" placeholder="e.g. Karan Singhania" required minlength="2" maxlength="100">
+                  <span class="form-error-msg" id="err-name">Please enter your name (min 2 characters).</span>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="contact_email" class="form-label">Email Address <span class="req">*</span></label>
+                  <input type="email" id="contact_email" name="contact_email" class="form-input" placeholder="e.g. karan@company.com" required>
+                  <span class="form-error-msg" id="err-email">Please enter a valid email address.</span>
+                </div>
+
+                <!-- Subject -->
+                <div class="form-group">
+                  <label for="contact_subject" class="form-label">Subject / Purpose <span class="req">*</span></label>
+                  <select id="contact_subject" name="contact_subject" class="form-select" required>
+                    <option value="">Select an inquiry category</option>
+                    <option value="partnership">Hospitality / Venue Partnership</option>
+                    <option value="csr">Corporate CSR Grant</option>
+                    <option value="media">Media / Press Inquiry</option>
+                    <option value="general">Night Shelter Request / General Inquiry</option>
+                  </select>
+                  <span class="form-error-msg" id="err-subject">Please select a subject.</span>
+                </div>
+
+                <!-- Message -->
+                <div class="form-group">
+                  <label for="contact_message" class="form-label">Message <span class="req">*</span></label>
+                  <textarea id="contact_message" name="contact_message" class="form-textarea" rows="4" placeholder="How can we assist you? (Minimum 20 characters, maximum 2,000 characters)" required minlength="20" maxlength="2000"></textarea>
+                  <span class="form-helper">Between 20 and 2,000 characters.</span>
+                  <span class="form-error-msg" id="err-message">Please provide a message of at least 20 characters.</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.75rem;">
+                <button type="submit" id="contact-submit-btn" class="btn btn-primary btn-large btn-block">
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Column: Operations Info & Static Map Card (TRD §4.7) -->
+          <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+            <div class="card" style="background-color: var(--white); border-color: var(--border-warm);">
+              <h2 style="font-size: 1.35rem; margin-bottom: 1.25rem;">Headquarters & Operations</h2>
+              <ul style="display: flex; flex-direction: column; gap: 1.25rem; list-style: none;">
+                <li style="display: flex; gap: 1rem;">
+                  <span style="font-size: 1.5rem;">📍</span>
+                  <div>
+                    <strong>National Coordination Centre</strong><br>
+                    <span style="color: var(--ink-light); font-size: 0.95rem;">14, Community Centre, Laxmi Nagar,<br>Delhi 110092, India</span>
+                  </div>
+                </li>
+                <li style="display: flex; gap: 1rem;">
+                  <span style="font-size: 1.5rem;">📞</span>
+                  <div>
+                    <strong>Toll-Free Helpline (24/7)</strong><br>
+                    <a href="tel:18008904422" style="font-weight: 700; font-size: 1.1rem; color: var(--orange-500);">1800-890-4422</a>
+                  </div>
+                </li>
+                <li style="display: flex; gap: 1rem;">
+                  <span style="font-size: 1.5rem;">✉️</span>
+                  <div>
+                    <strong>Direct Email</strong><br>
+                    <a href="mailto:help@secondserve.org" style="color: var(--ink-light);">help@secondserve.org</a>
+                  </div>
+                </li>
+                <li style="display: flex; gap: 1rem;">
+                  <span style="font-size: 1.5rem;">⏰</span>
+                  <div>
+                    <strong>Operating Hours</strong><br>
+                    <span style="color: var(--ink-light); font-size: 0.9rem;">
+                      Emergency Surplus Rescue: 24 Hours / 7 Days<br>
+                      Administrative Office: Mon–Sat, 9:00 AM – 6:00 PM
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Static Map Card (No iframe for performance & privacy compliance) -->
+            <div class="card" style="background: linear-gradient(135deg, #FFF4E6 0%, #FFF9F0 100%); border: 1.5px dashed var(--orange-500); text-align: center; padding: 2rem 1.5rem;">
+              <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🗺️</div>
+              <h3 style="font-size: 1.2rem; margin-bottom: 0.35rem;">Visit Our Laxmi Nagar Center</h3>
+              <p style="font-size: 0.9rem; color: var(--ink-light); margin-bottom: 1.25rem;">
+                Located near Laxmi Nagar Metro Station (Blue Line), East Delhi.
+              </p>
+              <a href="https://www.google.com/maps/search/?api=1&query=Laxmi+Nagar+Community+Centre+Delhi" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-small">
+                Get Directions on Google Maps ↗
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive FAQ Accordion (TRD §4.7) -->
+    <section class="section section-white" id="faq">
+      <div class="container" style="max-width: 820px;">
+        <div class="section-header">
+          <span class="eyebrow">Clarity First</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtext">Common queries from food donors, CSR partners, and night shelters.</p>
+        </div>
+
+        <div class="accordion">
+          <!-- Q1 -->
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>Who pays for food collection and transport?</span>
+                <span class="accordion-icon">▾</span>
+              </button>
+            </h3>
+            <div class="accordion-content">
+              <p>Food pickup is 100% free of charge for donors. Our electric vehicles, food-grade storage containers, driver stipends, and testing equipment are financed entirely through transparent CSR grants and philanthropic donors.</p>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>What types of food can be donated?</span>
+                <span class="accordion-icon">▾</span>
+              </button>
+            </h3>
+            <div class="accordion-content">
+              <p>We accept freshly cooked, untouched batch meals from banquets, hotel buffets, corporate dining halls, and catered events. We accept both vegetarian and non-vegetarian dishes (which are segregated into dedicated containers). We do not accept half-eaten plates or food stored without temperature control.</p>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>How quickly can a team arrive to collect surplus?</span>
+                <span class="accordion-icon">▾</span>
+              </button>
+            </h3>
+            <div class="accordion-content">
+              <p>In our core city service zones, our volunteer vans arrive within 60 to 90 minutes of receiving your report. For late-night wedding receptions (11 PM – 2 AM), our on-call Event Food Heroes dispatch immediately upon phone confirmation.</p>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>Can individual households donate surplus food?</span>
+                <span class="accordion-icon">▾</span>
+              </button>
+            </h3>
+            <div class="accordion-content">
+              <p>Our minimum pickup threshold is food for at least 10 people to ensure vehicle route efficiency. For smaller household quantities, we encourage dropping off packaged food directly at our nearest community kitchen drop-point or partnering with your residential society for joint pickups.</p>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>How do donors claim 80G tax deductions?</span>
+                <span class="accordion-icon">▾</span>
+              </button>
+            </h3>
+            <div class="accordion-content">
+              <p>All financial contributions qualify for 50% tax exemption under Section 80G of the Indian Income Tax Act (Order: AAKCS1234EF20261). Upon receiving your financial contribution, our automated system generates an official stamped 80G receipt with your PAN details.</p>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>Can night shelters request regular surplus food supplies?</span>
+                <span class="accordion-icon">▾</span>
+              </button>
+            </h3>
+            <div class="accordion-content">
+              <p>Yes. Registered shelter coordinators can contact us using the form above or call our helpline to be added to our distribution roster. We match your shelter's evening headcount with nearby regular banquet routes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img src="images/logo.svg" alt="Second Serve Logo" width="180" height="44" style="margin-bottom: 1.25rem; filter: brightness(0) invert(1);">
+          <p class="footer-desc">
+            Second Serve rescues surplus food from weddings, hotels, and banquets to serve hot wholesome meals to night shelters across India.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="report-food.html">Report Surplus Food</a></li>
+            <li><a href="volunteer.html">Volunteer Roles</a></li>
+            <li><a href="impact.html">Impact Reports</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Helpline</h4>
+          <ul class="footer-links">
+            <li>📞 1800-890-4422 (Toll Free)</li>
+            <li>✉️ help@secondserve.org</li>
+            <li>📍 14, Community Centre, Laxmi Nagar, Delhi 110092</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #D3CDC6;">Get our monthly impact digests.</p>
+          <form class="footer-newsletter-form">
+            <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="email" class="footer-newsletter-input" placeholder="Your email address" required aria-label="Email address for newsletter">
+            <button type="submit" class="btn btn-primary btn-block btn-small">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-reg-line">
+        Registered Non-Profit Trust · 80G Order: AAKCS1234EF20261 · 12A Reg: AAKCS1234EE20214 · NITI Aayog Darpan: DL/2021/0284910
+      </div>
+      <div class="footer-bottom">
+        <div>© <span id="current-year">2026</span> Second Serve NGO.</div>
+        <div>Demo website created for academic purposes; NGO and baseline impact figures are illustrative.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { submitContact } from "./js/api.js";
+    import { getSession } from "./js/auth.js";
+
+    // Pre-fill user profile if logged in
+    async function prefillUser() {
+      const session = await getSession();
+      if (session && session.user) {
+        const nameInput = document.getElementById('contact_name');
+        const emailInput = document.getElementById('contact_email');
+        if (nameInput && !nameInput.value && session.user.full_name) {
+          nameInput.value = session.user.full_name;
+        }
+        if (emailInput && !emailInput.value && session.user.email) {
+          emailInput.value = session.user.email;
+        }
+      }
+    }
+    prefillUser();
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const successPanel = document.getElementById('contact-success-panel');
+    const errorBanner = document.getElementById('contact-error-banner');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBanner.style.display = 'none';
+
+      // Honeypot check
+      const honeypot = form.querySelector('input[name="website"]');
+      if (honeypot && honeypot.value) {
+        form.reset();
+        successPanel.style.display = 'flex';
+        return;
+      }
+
+      form.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => el.removeAttribute('aria-invalid'));
+      form.querySelectorAll('.form-error-msg').forEach(el => el.classList.remove('is-visible'));
+
+      let isValid = true;
+      let firstErrorEl = null;
+
+      const name = form.contact_name.value.trim();
+      if (name.length < 2) {
+        isValid = false;
+        form.contact_name.setAttribute('aria-invalid', 'true');
+        document.getElementById('err-name').classList.add('is-visible');
+        if (!firstErrorEl) firstErrorEl = form.contact_name;
+      }
+
+      const email = form.contact_email.value.trim();
+      const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      if (!emailRegex.test(email)) {
+        isValid = false;
+        form.contact_email.setAttribute('aria-invalid', 'true');
+        document.getElementById('err-email').classList.add('is-visible');
+        if (!firstErrorEl) firstErrorEl = form.contact_email;
+      }
+
+      const subject = form.contact_subject.value;
+      if (!subject) {
+        isValid = false;
+        form.contact_subject.setAttribute('aria-invalid', 'true');
+        document.getElementById('err-subject').classList.add('is-visible');
+        if (!firstErrorEl) firstErrorEl = form.contact_subject;
+      }
+
+      const message = form.contact_message.value.trim();
+      if (message.length < 20) {
+        isValid = false;
+        form.contact_message.setAttribute('aria-invalid', 'true');
+        document.getElementById('err-message').classList.add('is-visible');
+        if (!firstErrorEl) firstErrorEl = form.contact_message;
+      }
+
+      if (!isValid) {
+        if (firstErrorEl) firstErrorEl.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending message…';
+
+      try {
+        await submitContact({
+          full_name: name,
+          email: email,
+          subject: subject,
+          message: message
+        });
+
+        form.reset();
+        successPanel.style.display = 'flex';
+        window.scrollTo({ top: successPanel.offsetTop - 100, behavior: 'smooth' });
+      } catch (err) {
+        console.error("Contact error:", err);
+        errorBanner.style.display = 'flex';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    });
+  </script>
+</body>
+</html>

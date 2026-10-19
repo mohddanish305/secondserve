@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Impact — Second Serve NGO</title>
+  <meta name="description" content="View verified food waste rescue statistics, monthly trend charts, beneficiary stories, and distribution breakdowns across India.">
+  <link rel="canonical" href="https://second-serve.org/impact.html">
+
+  <meta property="og:title" content="Our Impact — Second Serve">
+  <meta property="og:description" content="Over 3,20,000+ meals rescued and 96,000 kg of food waste avoided. Transparent, live-updated impact metrics.">
+  <meta property="og:image" content="images/og-cover.jpg">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <style>
+    .chart-bar-rect {
+      transition: height 0.6s ease, y 0.6s ease;
+    }
+    .chart-bar-rect:hover {
+      fill: var(--orange-600);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" role="banner">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand" aria-label="Second Serve Home">
+        <img src="images/logo.svg" alt="Second Serve Logo" width="180" height="44">
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+          <li><a href="impact.html" class="nav-link is-active">Impact</a></li>
+          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="report-food.html" class="btn btn-primary btn-small">Report Surplus Food</a>
+        <div class="nav-auth">
+          <a href="login.html" class="nav-auth-link">Log in</a>
+          <a href="signup.html" class="btn btn-secondary btn-small">Sign up</a>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="how-it-works.html" class="mobile-nav-link">How It Works</a></li>
+        <li><a href="impact.html" class="mobile-nav-link is-active">Impact</a></li>
+        <li><a href="volunteer.html" class="mobile-nav-link">Volunteer</a></li>
+        <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="report-food.html" class="btn btn-primary btn-block">Report Surplus Food</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow eyebrow-green">Radical Accountability</span>
+        <h1>Real-Time Rescue Impact</h1>
+        <p>Every plate rescued is logged in our database. Here is how our network diverts wholesome banquet surplus from municipal landfills to community tables.</p>
+      </div>
+    </section>
+
+    <!-- 5 Live Counters Strip (TRD §4.5) -->
+    <section class="section section-cream" style="padding-top: 3rem;">
+      <div class="container">
+        <div class="card" style="padding: 2.5rem 1.5rem; border-color: var(--border-warm); box-shadow: var(--shadow-md);">
+          <div class="counter-grid counter-grid-5">
+            <div class="counter-item">
+              <div class="counter-value" data-stat="meals_rescued">3,20,000</div>
+              <div class="counter-label">Meals Rescued</div>
+              <div class="counter-sub">Wholesome hot plates</div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-value green" data-stat="food_waste_kg">96,000</div>
+              <div class="counter-label">Waste Avoided (kg)</div>
+              <div class="counter-sub">Landfill methane prevented</div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-value" data-stat="partner_restaurants">210</div>
+              <div class="counter-label">Donor Partners</div>
+              <div class="counter-sub">Banquets & caterers</div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-value green" data-stat="volunteers">850</div>
+              <div class="counter-label">Registered Volunteers</div>
+              <div class="counter-sub">Across active chapters</div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-value" data-stat="cities">6</div>
+              <div class="counter-label">Cities Served</div>
+              <div class="counter-sub">Delhi, BLR, BOM + 3 more</div>
+            </div>
+          </div>
+          <p class="baseline-disclaimer">
+            Live counters are computed directly from database deliveries on top of verified illustrative baseline figures.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Section: 12-Month Trend + Where the Food Goes -->
+    <section class="section section-white">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 3rem;" class="impact-charts-grid">
+
+          <!-- 12-Month Trend SVG Bar Chart -->
+          <div class="card">
+            <span class="eyebrow">Monthly Growth</span>
+            <h2 style="font-size: 1.5rem; margin: 0.5rem 0 0.5rem 0;">12-Month Meal Rescue Trend</h2>
+            <p style="font-size: 0.95rem; color: var(--ink-light); margin-bottom: 1.5rem;">
+              Audited monthly meal volume rescued across our operating city zones.
+            </p>
+
+            <div style="width: 100%; overflow-x: auto;">
+              <svg id="monthly-chart-svg" viewBox="0 0 680 300" style="width: 100%; min-width: 540px; height: auto;" role="img" aria-label="12-Month rescued meals bar chart">
+                <!-- Dynamically rendered or fallback -->
+              </svg>
+            </div>
+          </div>
+
+          <!-- Where the Food Goes (Destinations Breakdown) -->
+          <div class="card">
+            <span class="eyebrow eyebrow-green">Nutritional Flow</span>
+            <h2 style="font-size: 1.5rem; margin: 0.5rem 0 0.5rem 0;">Where the Rescued Food Goes</h2>
+            <p style="font-size: 0.95rem; color: var(--ink-light); margin-bottom: 2rem;">
+              Surplus meals are channeled to verified community facilities based on urgent local need.
+            </p>
+
+            <div id="destinations-bars" style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <!-- Dynamically populated or fallback -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 0.4rem;">
+                  <span>Night Shelters (Rain Baseras)</span>
+                  <span>45%</span>
+                </div>
+                <div style="width: 100%; height: 16px; background-color: var(--cream); border-radius: 8px; overflow: hidden;">
+                  <div style="width: 45%; height: 100%; background-color: var(--orange-500); border-radius: 8px;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 0.4rem;">
+                  <span>Community Kitchens</span>
+                  <span>30%</span>
+                </div>
+                <div style="width: 100%; height: 16px; background-color: var(--cream); border-radius: 8px; overflow: hidden;">
+                  <div style="width: 30%; height: 100%; background-color: var(--green-500); border-radius: 8px;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 0.4rem;">
+                  <span>Slum Community Kitchens</span>
+                  <span>25%</span>
+                </div>
+                <div style="width: 100%; height: 16px; background-color: var(--cream); border-radius: 8px; overflow: hidden;">
+                  <div style="width: 25%; height: 100%; background-color: #F76707; border-radius: 8px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Beneficiary Impact Stories (TRD §4.5) -->
+    <section class="section section-cream-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Dignity in Every Plate</span>
+          <h2 class="section-title">Stories Behind the Statistics</h2>
+          <p class="section-subtext">Every meal rescued is a real human life nourished with dignity and care.</p>
+        </div>
+
+        <div class="story-grid">
+          <!-- Story 1 -->
+          <article class="story-card">
+            <img src="images/story-meera.jpg" alt="Meera Devi at East Delhi night shelter" class="story-card-img" loading="lazy">
+            <div class="story-card-body">
+              <span class="eyebrow eyebrow-green" style="align-self: flex-start;">East Delhi Shelter</span>
+              <h3 style="font-size: 1.35rem; margin: 0.75rem 0 0.5rem 0;">Meera’s Daily Community Kitchen</h3>
+              <p class="story-quote">
+                “When weddings finish at 11 PM, our volunteers deliver fresh shahi paneer and hot rotis by midnight. Children wake up to hot food instead of hungry tears.”
+              </p>
+              <p style="color: var(--ink-light); font-size: 0.95rem;">
+                Meera has managed night shelter distribution in Laxmi Nagar for 4 years, ensuring over 120 elderly and migrant workers receive guaranteed evening nourishment.
+              </p>
+            </div>
+          </article>
+
+          <!-- Story 2 -->
+          <article class="story-card">
+            <img src="images/story-ravi.jpg" alt="Elderly resident Ram Prasad receiving meal parcel" class="story-card-img" loading="lazy">
+            <div class="story-card-body">
+              <span class="eyebrow" style="align-self: flex-start;">Elderly Care Program</span>
+              <h3 style="font-size: 1.35rem; margin: 0.75rem 0 0.5rem 0;">Nourishment with Respect: Ram Prasad</h3>
+              <p class="story-quote">
+                “At 72, cooking after a day of manual labour was impossible. The meals brought by Second Serve volunteers are warm, respectful, and cleanly packed.”
+              </p>
+              <p style="color: var(--ink-light); font-size: 0.95rem;">
+                Through our weekend food drops, over 40 senior citizens living independently receive balanced nutrition without having to queue up at distant relief centres.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Illustrative Partner Strip (TRD §4.5) -->
+    <section class="section section-white">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <span class="eyebrow">Hospitality Champions</span>
+          <h2 style="font-size: 1.6rem;">Partner Banquets & Venues</h2>
+          <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">(Names marked illustrative for assignment demonstration)</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; opacity: 0.85;">
+          <div style="font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--ink-light); padding: 0.75rem 1.25rem; border: 1px dashed var(--border-warm); border-radius: var(--radius-sm);">
+            🏨 Grand Heritage Banquets
+          </div>
+          <div style="font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--ink-light); padding: 0.75rem 1.25rem; border: 1px dashed var(--border-warm); border-radius: var(--radius-sm);">
+            ✨ Royal Palace Convention
+          </div>
+          <div style="font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--ink-light); padding: 0.75rem 1.25rem; border: 1px dashed var(--border-warm); border-radius: var(--radius-sm);">
+            🌿 Spice Garden Hospitality
+          </div>
+          <div style="font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--ink-light); padding: 0.75rem 1.25rem; border: 1px dashed var(--border-warm); border-radius: var(--radius-sm);">
+            🌊 Sea View Caterers
+          </div>
+          <div style="font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--ink-light); padding: 0.75rem 1.25rem; border: 1px dashed var(--border-warm); border-radius: var(--radius-sm);">
+            👑 The Oberoi Grand Banqueting
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section section-cream" style="text-align: center;">
+      <div class="container">
+        <h2 class="section-title">Help Us Reach 5,00,000 Meals Rescued</h2>
+        <p class="section-subtext" style="max-width: 600px; margin: 0 auto 2rem auto;">
+          Whether you run a commercial kitchen or can spare three hours on a Saturday, your support counts.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="report-food.html" class="btn btn-primary btn-large">Report Surplus Food</a>
+          <a href="volunteer.html" class="btn btn-secondary btn-large">Join as Volunteer</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img src="images/logo.svg" alt="Second Serve Logo" width="180" height="44" style="margin-bottom: 1.25rem; filter: brightness(0) invert(1);">
+          <p class="footer-desc">
+            Second Serve rescues surplus food from weddings, hotels, and banquets to serve hot wholesome meals to night shelters across India.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="report-food.html">Report Surplus Food</a></li>
+            <li><a href="volunteer.html">Volunteer Roles</a></li>
+            <li><a href="impact.html">Impact Reports</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Helpline</h4>
+          <ul class="footer-links">
+            <li>📞 1800-890-4422 (Toll Free)</li>
+            <li>✉️ help@secondserve.org</li>
+            <li>📍 14, Community Centre, Laxmi Nagar, Delhi 110092</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #D3CDC6;">Get our monthly impact digests.</p>
+          <form class="footer-newsletter-form">
+            <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="email" class="footer-newsletter-input" placeholder="Your email address" required aria-label="Email address for newsletter">
+            <button type="submit" class="btn btn-primary btn-block btn-small">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-reg-line">
+        Registered Non-Profit Trust · 80G Order: AAKCS1234EF20261 · 12A Reg: AAKCS1234EE20214
+      </div>
+      <div class="footer-bottom">
+        <div>© <span id="current-year">2026</span> Second Serve NGO.</div>
+        <div>Demo website created for academic purposes; NGO and baseline impact figures are illustrative.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { getImpactSeries, FALLBACK_MONTHLY_SERIES, FALLBACK_DESTINATIONS } from "./js/api.js";
+
+    async function renderCharts() {
+      const data = await getImpactSeries();
+      const monthly = data.monthly || FALLBACK_MONTHLY_SERIES;
+      const destinations = data.destinations || FALLBACK_DESTINATIONS;
+
+      // 1. Render Monthly SVG Bar Chart
+      const svg = document.getElementById('monthly-chart-svg');
+      if (svg) {
+        const svgWidth = 680;
+        const svgHeight = 280;
+        const padLeft = 50;
+        const padBottom = 40;
+        const padTop = 20;
+        const chartW = svgWidth - padLeft - 20;
+        const chartH = svgHeight - padBottom - padTop;
+
+        const maxMeals = Math.max(...monthly.map(m => m.meals), 18000);
+        const barWidth = Math.floor(chartW / monthly.length) - 10;
+
+        let svgHtml = '';
+
+        // Horizontal Grid lines
+        for (let g = 0; g <= 4; g++) {
+          const val = Math.round((maxMeals / 4) * g);
+          const y = padTop + chartH - (g * (chartH / 4));
+          svgHtml += `
+            <line x1="${padLeft}" y1="${y}" x2="${svgWidth - 20}" y2="${y}" stroke="#EEDEC9" stroke-dasharray="3 3" />
+            <text x="${padLeft - 8}" y="${y + 4}" fill="#868E96" font-size="11" text-anchor="end" font-family="'Inter', sans-serif">${(val / 1000).toFixed(0)}k</text>
+          `;
+        }
+
+        // Bars
+        monthly.forEach((m, idx) => {
+          const x = padLeft + idx * (chartW / monthly.length) + 5;
+          const barH = (m.meals / maxMeals) * chartH;
+          const y = padTop + chartH - barH;
+
+          svgHtml += `
+            <g class="chart-bar-group" tabindex="0" role="graphics-symbol" aria-label="${m.month_label}: ${m.meals.toLocaleString()} meals">
+              <rect class="chart-bar-rect" x="${x}" y="${y}" width="${barWidth}" height="${barH}" rx="6" fill="#E8590C" />
+              <text x="${x + barWidth / 2}" y="${y - 6}" fill="#D9480F" font-size="10.5" font-weight="600" text-anchor="middle" font-family="'Inter', sans-serif">${m.meals >= 10000 ? (m.meals/1000).toFixed(1)+'k' : m.meals}</text>
+              <text x="${x + barWidth / 2}" y="${svgHeight - 12}" fill="#495057" font-size="12" font-weight="500" text-anchor="middle" font-family="'Inter', sans-serif">${m.month_label}</text>
+            </g>
+          `;
+        });
+
+        svg.innerHTML = svgHtml;
+      }
+
+      // 2. Render Destinations
+      const destContainer = document.getElementById('destinations-bars');
+      if (destContainer && destinations) {
+        const colors = ['#E8590C', '#2F9E44', '#F76707'];
+        destContainer.innerHTML = destinations.map((d, i) => `
+          <div>
+            <div style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 0.4rem;">
+              <span>${d.name}</span>
+              <span>${d.pct}%</span>
+            </div>
+            <div style="width: 100%; height: 16px; background-color: var(--cream); border-radius: 8px; overflow: hidden;">
+              <div style="width: ${d.pct}%; height: 100%; background-color: ${colors[i % colors.length]}; border-radius: 8px; transition: width 0.8s ease;"></div>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    renderCharts();
+  </script>
+</body>
+</html>

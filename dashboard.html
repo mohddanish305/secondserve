@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User & Volunteer Dashboard — Second Serve</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <style>
+    .dash-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-warm);
+      padding: 2rem 0;
+    }
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 992px) {
+      .dash-grid {
+        grid-template-columns: 320px 1fr;
+      }
+    }
+    .pickup-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-warm);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" role="banner">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand" aria-label="Second Serve Home">
+        <img src="images/logo.svg" alt="Second Serve Logo" width="180" height="44">
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+          <li><a href="impact.html" class="nav-link">Impact</a></li>
+          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="report-food.html" class="btn btn-primary btn-small">Report Surplus Food</a>
+        <div class="nav-auth">
+          <!-- Handled by auth.js -->
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Dashboard Header -->
+    <section class="dash-header">
+      <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <h1 style="font-size: 2rem; margin: 0;">Hello, <span id="user-greeting-name">Loading…</span></h1>
+            <span id="user-role-badge" class="status-badge" style="background-color: var(--orange-100); color: var(--orange-600);">User</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--ink-light); margin: 0.25rem 0 0 0;" id="user-email-display">
+            user@example.com
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;" id="header-action-buttons">
+          <!-- Admin shortcut button populated here if role === 'admin' -->
+          <a href="report-food.html" class="btn btn-primary btn-small">+ Report Surplus Food</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Dashboard Workspace -->
+    <section class="section section-cream" style="padding-top: 2.5rem;">
+      <div class="container">
+        <div class="dash-grid">
+
+          <!-- Left Column: Profile Card & Volunteer Application Status -->
+          <div>
+            <!-- Profile Edit Card -->
+            <div class="card" style="margin-bottom: 1.5rem;">
+              <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Personal Profile</h2>
+              <form id="profile-edit-form">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label for="prof-name" class="form-label">Full Name</label>
+                  <input type="text" id="prof-name" class="form-input" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label for="prof-phone" class="form-label">Mobile Number</label>
+                  <input type="tel" id="prof-phone" class="form-input" placeholder="10-digit mobile" pattern="^[6-9]\d{9}$">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                  <label class="form-label">Email (Read-only)</label>
+                  <input type="email" id="prof-email" class="form-input" disabled style="background: #E9ECEF; color: var(--muted);">
+                </div>
+                <button type="submit" id="prof-save-btn" class="btn btn-secondary btn-small btn-block">Save Profile</button>
+              </form>
+            </div>
+
+            <!-- Become a Volunteer / Application Status Card (For normal users) -->
+            <div id="volunteer-status-card" class="card" style="display: none; background: var(--white);">
+              <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Volunteer Status</h3>
+              <div id="volunteer-status-content">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Pickups Section -->
+          <div>
+            <!-- Volunteer Assigned Pickups Section (If volunteer or admin) -->
+            <div id="assigned-pickups-section" style="display: none; margin-bottom: 2.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div>
+                  <h2 style="font-size: 1.4rem; color: var(--green-600); margin: 0;">🚚 My Assigned Pickups</h2>
+                  <p style="font-size: 0.85rem; color: var(--muted); margin: 0.15rem 0 0 0;">Food rescue dispatches assigned to you.</p>
+                </div>
+                <span class="status-badge" style="background-color: var(--green-100); color: var(--green-600);">Volunteer Active</span>
+              </div>
+
+              <div id="assigned-pickups-list">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- User's Reported Pickups Section -->
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div>
+                  <h2 style="font-size: 1.4rem; margin: 0;">🍲 My Reported Food Requests</h2>
+                  <p style="font-size: 0.85rem; color: var(--muted); margin: 0.15rem 0 0 0;">Track status from dispatch to shelter delivery.</p>
+                </div>
+                <a href="report-food.html" class="btn btn-outline btn-small">+ New Report</a>
+              </div>
+
+              <div id="user-pickups-list">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Destination Picker Modal for Delivering Food (TRD §4.11) -->
+  <div class="modal-backdrop" id="delivery-modal" role="dialog" aria-modal="true" aria-labelledby="modal-dest-title">
+    <div class="modal-dialog">
+      <h3 id="modal-dest-title" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Confirm Delivery Destination</h3>
+      <p style="font-size: 0.9rem; color: var(--ink-light); margin-bottom: 1.25rem;">
+        Please select where this rescued food was delivered to complete the live impact log.
+      </p>
+
+      <form id="delivery-destination-form">
+        <input type="hidden" id="modal-pickup-id">
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label for="destination-select" class="form-label">Delivered To <span class="req">*</span></label>
+          <select id="destination-select" class="form-select" required>
+            <option value="">Select destination facility</option>
+            <option value="night_shelter">Night Shelter (Rain Basera)</option>
+            <option value="community_kitchen">Community Kitchen</option>
+            <option value="slum_kitchen">Slum Community Kitchen</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+          <button type="button" class="btn btn-outline btn-small" id="modal-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-small" id="modal-confirm-btn">Confirm Delivery</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
