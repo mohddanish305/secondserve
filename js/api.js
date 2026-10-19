@@ -238,6 +238,24 @@ export async function submitPickup(values) {
     return data; // Server reference ID (e.g., SS-2026-1004)
   }
 
+  // Server-side constraints check mirroring schema.sql
+  if (new Date(values.p_pickup_time) <= new Date()) {
+    const err = new Error("Pickup time must be in the future");
+    err.code = '22023';
+    throw err;
+  }
+  const qty = parseInt(values.p_quantity, 10);
+  if (isNaN(qty) || qty < 10 || qty > 5000) {
+    const err = new Error("Quantity must be between 10 and 5000");
+    err.code = '22023';
+    throw err;
+  }
+  if (!/^[6-9]\d{9}$/.test(values.p_phone.trim())) {
+    const err = new Error("Phone number must be a 10-digit number starting with 6–9");
+    err.code = '22023';
+    throw err;
+  }
+
   // Demo store fallback
   const store = getDemoStore();
   const nextSeq = store.ref_seq || 1004;
@@ -365,6 +383,12 @@ export async function submitContact(values) {
     return true;
   }
 
+  if (values.message.trim().length < 20 || values.message.trim().length > 2000) {
+    const err = new Error("Message must be between 20 and 2000 characters");
+    err.code = '22023';
+    throw err;
+  }
+
   const store = getDemoStore();
   store.messages.unshift({
     id: 'msg-' + Date.now(),
@@ -489,6 +513,11 @@ export async function volunteerUpdateStatus(id, status, deliveredTo) {
   const store = getDemoStore();
   const pickup = store.pickups.find(p => p.id === id);
   if (!pickup) throw new Error("Pickup not found");
+  if (!((pickup.status === 'assigned' && status === 'collected') || (pickup.status === 'collected' && status === 'delivered'))) {
+    const err = new Error("Invalid status change");
+    err.code = '22023';
+    throw err;
+  }
   if (status === 'delivered' && !deliveredTo) {
     throw new Error("Delivery destination is required");
   }
