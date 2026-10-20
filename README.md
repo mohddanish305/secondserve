@@ -1,113 +1,166 @@
-# Second Serve — Food Waste Rescue NGO Web App (Full-Stack v2.0)
+# Second Serve — Food Waste Rescue NGO Web App
 
-Second Serve is a full-stack web application designed for a modern food-rescue non-governmental organisation (NGO) in India. The platform collects surplus food from weddings, hotels, restaurants, and banquets and delivers it the same day to night shelters (Rain Baseras), slum kitchens, and community kitchens across 6 major Indian cities.
+[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database%20%26%20Auth-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![Lucide](https://img.shields.io/badge/Icons-Lucide%20React-F56565)](https://lucide.dev/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+**Second Serve** is a modern full-stack web application built for a food-rescue non-governmental organisation (NGO) in India. The platform bridges the gap between surplus food generators (weddings, banquets, hotels, corporate cafeterias, and restaurants) and hunger relief centers (night shelters / Rain Baseras, slum community kitchens, and orphanages) across 6 major Indian metropolitan cities.
 
 ---
 
 ## 🌟 Key Features
 
-1. **3D Interactive Hero (Home):** Built with Three.js (procedural low-poly steel thali, floating apple, roti, carrot, parcel box, and warm particle lighting) with desktop cursor parallax and graceful fallback to a high-resolution photorealistic hero image.
-2. **Live Impact Counters:** Dynamically computed from database deliveries on top of illustrative baseline metrics (Meals Rescued, Food Waste Avoided in kg, Partner Venues, Volunteers, Cities Served).
-3. **Frictionless Food Reporting:** Banquet managers and event hosts can report surplus food in under 60 seconds with **no login required**. Generates a unique, server-assigned tracking reference ID (`SS-2026-####`).
-4. **Instant Pickup Tracking:** Reference ID + phone number status lookup with a 4-step visual timeline (`Reported → Assigned → Collected → Delivered`).
-5. **Volunteer Recruitment & Roles:** 4 dedicated role cards (`Food Hero`, `Shelter Coordinator`, `Event Volunteer`, `Social Media Volunteer`) with 1-click role selection and application database persistence.
-6. **User & Volunteer Dashboard:**
-   - Donors track all their submitted pickups.
-   - Volunteers access **"My Assigned Pickups"**, review donor contact numbers, and advance statuses (`Mark Collected`, `Mark Delivered` with destination facility selection).
-7. **Admin Operations Center:**
-   - Real-time metric cards (New Requests, In Progress, Delivered, Pending Volunteers, Unread Inquiries).
-   - Filterable, paginated Food Pickups management with instant volunteer assignment.
-   - Volunteer application approvals (promotes user account to Volunteer role).
-   - Inquiries management and 1-click CSV download of newsletter subscribers.
-8. **Radical Transparency:** Cost-per-meal financial breakdown (₹38 = 10 meals), verified 80G / 12A registration details, and downloadable audit reports.
+### 🍽️ 1. Frictionless Food Reporting (Under 60 Seconds)
+- **No Login Required for Donors:** Event hosts and banquet managers can submit surplus food without friction.
+- **Auto-Generated Tracking ID:** Assigns a server-validated reference ID (`SS-YYYY-####`).
+- **Live Status Timeline:** Real-time visual tracking from `Reported → Assigned → Collected → Delivered`.
+
+### 🛡️ 2. Modern Accessible Navigation
+- Responsive navbar with a **1280px max-width container** and flexible layout.
+- Quick **"Report Surplus Food"** brand CTA.
+- **Account Dropdown Menu:** 40px avatar circle showing user initials, role badges (`Admin`, `Volunteer`, `User`), direct links to Dashboard, Admin Panel (admin only), and secure logout.
+- Keyboard accessible (Tab navigation, Escape dismissal, auto-close on outside click and route changes).
+- Mobile drawer navigation below 1180px with full touch support.
+
+### 📊 3. Live Verified Impact Metrics
+- Dynamically calculated meals rescued, kilograms of food waste avoided, CO₂ emission reductions, partner venues, and active volunteers.
+- Radial transparency and cost-per-meal breakdown (₹38 rescues 10 nutritious meals).
+
+### 🤝 4. Volunteer Portal & Chapters
+- 4 specialized volunteer roles:
+  - **Food Hero (Field Logistics)**
+  - **Shelter Coordinator (Quality & Distribution)**
+  - **Event Volunteer (Banquets & Drives)**
+  - **Digital Advocate (Awareness & Outreach)**
+- Chapter selection across Delhi NCR, Mumbai MMR, Bengaluru, Hyderabad, Kolkata, and Chennai.
+
+### 📱 5. User & Volunteer Dashboard
+- **Donors:** View all past pickup requests, reference IDs, and fulfillment status.
+- **Volunteers:** Access assigned pickups, contact details, navigation, and one-click actions to advance status (`Mark Collected`, `Mark Delivered`).
+
+### ⚙️ 6. Operations Admin Panel
+- Live database control and dispatch center.
+- Instant volunteer assignment to incoming food pickups.
+- Volunteer application review and approval (updates role permissions).
+- Inquiries inbox and newsletter subscriber management (with 1-click CSV export).
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## 🏗️ Architecture & Tech Stack
 
-- **Frontend:** HTML5, CSS3 (Custom Design System with Poppins + Inter typography), Vanilla JavaScript (ES Modules, zero build step required).
-- **3D Graphics:** Three.js r165 (dynamically imported with jsdelivr + unpkg CDN fallbacks).
-- **Backend & Database:** PostgreSQL via Supabase (Row Level Security, Foreign Key constraints, Triggers, RPC Database Functions).
-- **Authentication:** Supabase Auth (Email + Password with persistent sessions and client route guards).
-- **Deployment:** Netlify / Vercel / GitHub Pages (South Asia / Mumbai region recommended for Supabase).
+| Layer | Technology |
+|---|---|
+| **Frontend Framework** | React 18 (Vite SPA) |
+| **Routing** | React Router v6 (`BrowserRouter`) |
+| **Styling** | Custom Vanilla CSS Design System (Warm Cream & Sprout Palette) |
+| **Icons** | Lucide React |
+| **Backend & Database** | PostgreSQL via Supabase |
+| **Authentication** | Supabase Auth (`@supabase/supabase-js`) |
+| **Deployment** | Vercel / Netlify (`_redirects` & `vercel.json` SPA rewrite) |
 
 ---
 
-## 📁 File & Folder Structure
+## 📁 Project Structure
 
 ```
 second-serve/
-├── index.html              # Home page with 3D hero & live impact counters
-├── how-it-works.html       # 3-step logistics explainer & food safety guidelines
-├── report-food.html        # Surplus food reporting form + Track pickup box
-├── volunteer.html          # Volunteer roles & application form
-├── impact.html             # Verified impact dashboard, SVG trends, & destination breakdown
-├── about.html              # Mission, timeline, team, and 80G transparency section
-├── contact.html            # Contact form, static map card, & FAQ accordion
-├── login.html              # Account login & session redirect
-├── signup.html             # Account registration with client validations
-├── dashboard.html          # User & Volunteer operational dashboard
-├── admin.html              # Operations Admin Console
-├── css/
-│   └── styles.css          # Design system, CSS variables, components, & responsive styles
-├── js/
-│   ├── config.js           # Supabase Project URL & Anon Public Key
-│   ├── supabase.js         # Lazy client loader with multi-CDN fallback
-│   ├── api.js              # Complete database access layer & offline demo fallback
-│   ├── auth.js             # Authentication, session manager, & route guards
-│   ├── main.js             # Sticky navbar, count-up animations, carousel, FAQ, newsletter
-│   ├── hero3d.js           # Procedural Three.js 3D hero with auto-rotation & parallax
-│   ├── dashboard.js        # User & volunteer dashboard controller
-│   └── admin.js            # Operations console, tables, status changes, CSV download
+├── index.html              # Vite SPA single entry point
+├── .env.example            # Environment variables template (safe for VCS)
+├── .gitignore              # Ignores .env, node_modules, dist
+├── package.json            # Scripts & npm dependencies
+├── vite.config.js          # Vite build configuration
+├── vercel.json             # Vercel SPA routing rewrites
+├── public/
+│   ├── _redirects          # Netlify SPA redirect rules
+│   ├── favicon.svg         # SVG Favicon
+│   └── images/             # Brand logos & web assets
 ├── supabase/
-│   └── schema.sql          # Full PostgreSQL schema, RLS policies, enums, triggers, & RPCs
-├── images/
-│   ├── logo.svg            # Vector brand logo (plate, sprout, Poppins wordmark)
-│   ├── hero-fallback.jpg   # Photorealistic hero image for WebGL fallback
-│   ├── how-step-1.jpg      # Step 1: Hotel banquet handover
-│   ├── how-step-2.jpg      # Step 2: Insulated transport van loading
-│   ├── how-step-3.jpg      # Step 3: Night shelter dining hall serving
-│   ├── volunteer-team.jpg  # Community volunteer team
-│   ├── story-meera.jpg     # Beneficiary story: Night shelter coordinator
-│   ├── story-ravi.jpg      # Beneficiary story: Senior citizen recipient
-│   └── og-cover.jpg        # Open Graph share card
-└── README.md
+│   └── schema.sql          # PostgreSQL DDL, RLS policies, enums, triggers & RPCs
+└── src/
+    ├── main.jsx            # React root, Router & AuthProvider
+    ├── App.jsx             # Main router setup & layout
+    ├── styles.css          # Core design tokens & master stylesheet
+    ├── footer.css          # Footer styles
+    ├── components/         # Navbar, Footer, Hero, Route Guards
+    ├── context/            # AuthContext (state, role, session management)
+    ├── lib/                # Supabase client & API services
+    └── pages/              # Home, HowItWorks, Impact, Volunteer, About, Contact, ReportFood, Dashboard, Admin, Login, Signup
 ```
 
 ---
 
-## 🚀 Setup & Deployment
+## 🚀 Getting Started
 
-### 1. Supabase Backend Setup
-1. Log in to [supabase.com](https://supabase.com) and create a new project (select Region: **South Asia (Mumbai)**).
-2. Open the **SQL Editor**, open `supabase/schema.sql`, paste the full SQL content, and click **Run**.
-3. Under **Authentication → Providers → Email**, turn **OFF "Confirm email"** (enables immediate testing without waiting for confirmation emails).
-4. Go to **Project Settings → API** and copy your **Project URL** and the **anon / public key**.
-5. Open `js/config.js` and paste your credentials:
-   ```javascript
-   export const SUPABASE_URL = "https://your-project-id.supabase.co";
-   export const SUPABASE_ANON_KEY = "your-anon-key-here";
-   ```
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18.0 or higher recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- A free [Supabase](https://supabase.com/) account
 
-### 2. Creating Your First Administrator
-1. Navigate to `signup.html` in your browser and register an account.
-2. In the Supabase SQL Editor, execute:
-   ```sql
-   UPDATE public.profiles
-   SET role = 'admin'
-   WHERE email = 'your-email@example.com';
-   ```
-3. Log out and log back in. The navbar and dashboard will now feature the **Admin Panel** shortcut.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/mohddanish305/secondserve.git
+cd secondserve
+```
 
-### 3. Frontend Deployment (Netlify)
-1. Drag and drop the `second-serve` folder onto [Netlify Drop](https://app.netlify.com/drop) or connect via GitHub repository.
-2. In Supabase Dashboard under **Authentication → URL Configuration**, add your deployed Netlify URL to the **Site URL** and **Redirect URLs**.
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Environment Configuration
+Copy the `.env.example` template to `.env`:
+```bash
+cp .env.example .env
+```
+Open `.env` and fill in your Supabase credentials:
+```env
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-public-key
+```
+
+### 4. Database Setup
+1. Log into your [Supabase Dashboard](https://supabase.com/dashboard).
+2. Go to the **SQL Editor**.
+3. Copy the contents of [`supabase/schema.sql`](supabase/schema.sql) and click **Run**.
+4. In **Authentication → Providers → Email**, turn **OFF "Confirm email"** for testing.
+
+### 5. Run the Local Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🔒 Security Best Practices Implemented
+## 🚢 Deployment
 
-- **Row Level Security (RLS):** Enforced on all tables (`profiles`, `pickup_requests`, `volunteer_applications`, `contact_messages`, `newsletter_subscribers`).
-- **No Secret Keys in Frontend:** Only the anon / public key is configured.
-- **XSS Prevention:** All user-submitted content in dashboards and tables is rendered using `textContent`.
-- **Honeypot Anti-Spam:** Silent client-side traps on public forms without external tracking cookies.
+### Deploy to Vercel
+1. Import your GitHub repository into Vercel.
+2. Select Framework Preset: **Vite**.
+3. Set the Environment Variables:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+4. Click **Deploy**. SPA routing is automatically handled by `vercel.json`.
+
+### Deploy to Netlify
+1. Connect your repository to Netlify.
+2. Build command: `npm run build`
+3. Publish directory: `dist`
+4. Configure environment variables in Netlify Site Settings.
+5. SPA routing is automatically handled by `public/_redirects`.
+
+---
+
+## 🔒 Security & Privacy
+
+- **Row Level Security (RLS):** Strict policies ensure users only access their own data, and only admins have dispatch authority.
+- **No Secrets in Client:** Only the Supabase `anon` public key is bundled in frontend builds.
+- **Anti-Spam Protection:** Silent honeypot traps on public forms prevent bot submissions without annoying captchas.
+- **Protected Environment:** `.env` and sensitive configurations are strictly excluded by `.gitignore`.
+
+---
+
+## 📄 License
+This project is open-source under the [MIT License](LICENSE).

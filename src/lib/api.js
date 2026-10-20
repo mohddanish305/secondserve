@@ -1,10 +1,10 @@
 /**
  * Second Serve — Database API Layer (TRD v2.0 §16.4)
- * The ONLY file that communicates directly with the database.
+ * React Vite migrated version: uses npm @supabase/supabase-js
+ * Identical function names, parameters, and return signatures.
  */
 
-import { getClient } from "./supabase.js";
-import { SUPABASE_URL } from "./config.js";
+import { getClient, SUPABASE_URL, isConfiguredRemote } from "./supabase.js";
 
 // Hardcoded Baseline & Series Fallbacks (TRD §4.1, §4.5, §16.4)
 export const BASELINE_STATS = {
@@ -37,15 +37,16 @@ export const FALLBACK_DESTINATIONS = [
   { name: 'Slum kitchens', pct: 25 }
 ];
 
-// Local Demo Store Helper (ensures full interactive testability even offline or before project keys are added)
 const DEMO_STORE_KEY = 'SS_DEMO_DATA_V2';
+
 function getDemoStore() {
+  if (typeof window === 'undefined') return { pickups: [], volunteers: [], applications: [], messages: [], subscribers: [] };
   const existing = localStorage.getItem(DEMO_STORE_KEY);
   if (existing) {
     try { return JSON.parse(existing); } catch(e) {}
   }
   const initial = {
-    ref_seq: 1004,
+    ref_seq: 1006,
     pickups: [
       {
         id: "d101-uuid",
@@ -136,7 +137,7 @@ function getDemoStore() {
       {
         id: "msg-101",
         full_name: "Karan Singhania",
-        email: "karan@csr-ventures.org",
+        email: "karan@example.com",
         subject: "csr",
         message: "We would like to discuss corporate CSR partnership for funding cold-chain electric vans in Delhi.",
         is_read: false,
@@ -152,24 +153,19 @@ function getDemoStore() {
 }
 
 function saveDemoStore(store) {
-  localStorage.setItem(DEMO_STORE_KEY, JSON.stringify(store));
-}
-
-function isConfiguredRemote() {
-  return SUPABASE_URL && !SUPABASE_URL.includes("second-serve-demo.supabase.co") && !SUPABASE_URL.includes("YOUR-PROJECT-REF");
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(DEMO_STORE_KEY, JSON.stringify(store));
+  }
 }
 
 /* =====================================================================
    1. PUBLIC FUNCTIONS
    ===================================================================== */
 
-/**
- * Fetch live impact stats (RPC get_impact_stats) with guaranteed fallback
- */
 export async function getImpactStats() {
   if (isConfiguredRemote()) {
     try {
-      const sb = await getClient();
+      const sb = getClient();
       const { data, error } = await sb.rpc('get_impact_stats');
       if (!error && data) return data;
     } catch (e) {
@@ -177,7 +173,6 @@ export async function getImpactStats() {
     }
   }
 
-  // Calculate with demo store if running locally
   const store = getDemoStore();
   const delivered = store.pickups.filter(p => p.status === 'delivered');
   const deliveredMeals = delivered.reduce((sum, p) => sum + (p.quantity_people || 0), 0);
@@ -193,13 +188,10 @@ export async function getImpactStats() {
   };
 }
 
-/**
- * Fetch impact series for charts
- */
 export async function getImpactSeries() {
   if (isConfiguredRemote()) {
     try {
-      const sb = await getClient();
+      const sb = getClient();
       const [monthlyRes, destRes] = await Promise.all([
         sb.from('impact_monthly').select('*').order('sort_order'),
         sb.from('impact_destinations').select('*')
@@ -217,12 +209,9 @@ export async function getImpactSeries() {
   };
 }
 
-/**
- * Submit surplus food report (RPC submit_pickup)
- */
 export async function submitPickup(values) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.rpc('submit_pickup', {
       p_name: values.p_name,
       p_phone: values.p_phone,
@@ -235,7 +224,7 @@ export async function submitPickup(values) {
       p_notes: values.p_notes || null
     });
     if (error) throw error;
-    return data; // Server reference ID (e.g., SS-2026-1004)
+    return data;
   }
 
   // Server-side constraints check mirroring schema.sql
@@ -256,13 +245,11 @@ export async function submitPickup(values) {
     throw err;
   }
 
-  // Demo store fallback
   const store = getDemoStore();
-  const nextSeq = store.ref_seq || 1004;
+  const nextSeq = store.ref_seq || 1006;
   const refId = `SS-${new Date().getFullYear()}-${nextSeq}`;
   store.ref_seq = nextSeq + 1;
 
-  // Check auth user
   let currentUserId = null;
   try {
     const user = JSON.parse(localStorage.getItem('SS_CURRENT_USER') || 'null');
@@ -294,12 +281,9 @@ export async function submitPickup(values) {
   return refId;
 }
 
-/**
- * Track pickup by reference ID and phone (RPC track_pickup)
- */
 export async function trackPickup(ref, phone) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.rpc('track_pickup', {
       p_ref: ref.trim().toUpperCase(),
       p_phone: phone.trim()
@@ -324,12 +308,9 @@ export async function trackPickup(ref, phone) {
   }];
 }
 
-/**
- * Submit volunteer application
- */
 export async function submitVolunteerApplication(values) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.from('volunteer_applications').insert({
       full_name: values.full_name.trim(),
       email: values.email.trim(),
@@ -367,12 +348,9 @@ export async function submitVolunteerApplication(values) {
   return true;
 }
 
-/**
- * Submit contact message
- */
 export async function submitContact(values) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.from('contact_messages').insert({
       full_name: values.full_name.trim(),
       email: values.email.trim(),
@@ -403,13 +381,10 @@ export async function submitContact(values) {
   return true;
 }
 
-/**
- * Subscribe to newsletter in footer
- */
 export async function subscribeNewsletter(email) {
   const cleanEmail = email.trim().toLowerCase();
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.from('newsletter_subscribers').insert({ email: cleanEmail });
     if (error) {
       if (error.code === '23505') return { duplicate: true };
@@ -438,7 +413,7 @@ export async function subscribeNewsletter(email) {
 
 export async function updateProfile(uid, { full_name, phone }) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.from('profiles').update({
       full_name: full_name ? full_name.trim() : undefined,
       phone: phone ? phone.trim() : null
@@ -456,7 +431,7 @@ export async function updateProfile(uid, { full_name, phone }) {
 
 export async function myPickups(uid) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.from('pickup_requests')
       .select('*')
       .eq('user_id', uid)
@@ -471,7 +446,7 @@ export async function myPickups(uid) {
 
 export async function myAssignedPickups(uid) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.from('pickup_requests')
       .select('*')
       .eq('assigned_volunteer', uid)
@@ -486,7 +461,7 @@ export async function myAssignedPickups(uid) {
 
 export async function myApplications(uid, email) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.from('volunteer_applications')
       .select('*')
       .or(`user_id.eq.${uid},email.eq.${email}`);
@@ -500,7 +475,7 @@ export async function myApplications(uid, email) {
 
 export async function volunteerUpdateStatus(id, status, deliveredTo) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.rpc('volunteer_update_status', {
       p_id: id,
       p_status: status,
@@ -536,7 +511,7 @@ export async function volunteerUpdateStatus(id, status, deliveredTo) {
 
 export async function adminCounts() {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const [reportedRes, inProgressRes, deliveredRes, pendingAppsRes, unreadMsgRes] = await Promise.all([
       sb.from('pickup_requests').select('*', { count: 'exact', head: true }).eq('status', 'reported'),
       sb.from('pickup_requests').select('*', { count: 'exact', head: true }).in('status', ['assigned', 'collected']),
@@ -565,11 +540,12 @@ export async function adminCounts() {
 
 export async function adminListPickups({ status, city, page = 0 }) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     let query = sb.from('pickup_requests')
-      .select('*, assigned:assigned_volunteer(full_name, email)')
+      .select('*')
       .order('created_at', { ascending: false })
       .range(page * 25, page * 25 + 24);
+
 
     if (status && status !== 'all') query = query.eq('status', status);
     if (city && city !== 'all') query = query.eq('city', city);
@@ -588,7 +564,7 @@ export async function adminListPickups({ status, city, page = 0 }) {
 
 export async function adminListVolunteers() {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.from('profiles').select('id, full_name, email').eq('role', 'volunteer');
     if (error) throw error;
     return data || [];
@@ -600,7 +576,7 @@ export async function adminListVolunteers() {
 
 export async function adminAssignPickup(id, volunteerId) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.from('pickup_requests')
       .update({ assigned_volunteer: volunteerId, status: 'assigned' })
       .eq('id', id);
@@ -620,7 +596,7 @@ export async function adminAssignPickup(id, volunteerId) {
 
 export async function adminSetPickupStatus(id, status, deliveredTo) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const payload = { status };
     if (status === 'delivered') payload.delivered_to = deliveredTo;
     const { error } = await sb.from('pickup_requests').update(payload).eq('id', id);
@@ -640,7 +616,7 @@ export async function adminSetPickupStatus(id, status, deliveredTo) {
 
 export async function adminListApplications() {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.from('volunteer_applications')
       .select('*')
       .order('created_at', { ascending: false });
@@ -654,7 +630,7 @@ export async function adminListApplications() {
 
 export async function adminReviewApplication(id, approve) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.rpc('review_volunteer_application', {
       p_id: id,
       p_approve: approve
@@ -685,7 +661,7 @@ export async function adminReviewApplication(id, approve) {
 
 export async function adminListMessages() {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.from('contact_messages')
       .select('*')
       .order('created_at', { ascending: false });
@@ -699,7 +675,7 @@ export async function adminListMessages() {
 
 export async function adminMarkMessageRead(id) {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { error } = await sb.from('contact_messages').update({ is_read: true }).eq('id', id);
     if (error) throw error;
     return true;
@@ -714,7 +690,7 @@ export async function adminMarkMessageRead(id) {
 
 export async function adminListSubscribers() {
   if (isConfiguredRemote()) {
-    const sb = await getClient();
+    const sb = getClient();
     const { data, error } = await sb.from('newsletter_subscribers')
       .select('*')
       .order('created_at', { ascending: false });

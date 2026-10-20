@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none" width="280" height="64" role="img" aria-label="Second Serve Logo">
+  <defs>
+    <linearGradient id="ss-orange-grad-light" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF922B"/>
+      <stop offset="100%" stop-color="#E8590C"/>
+    </linearGradient>
+    <linearGradient id="ss-green-grad-light" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#51CF66"/>
+      <stop offset="100%" stop-color="#2F9E44"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon Mark -->
+  <g transform="translate(6, 6)">
+    <!-- Plate base -->
+    <circle cx="26" cy="26" r="24" fill="#2E231C" stroke="#D9480F" stroke-width="2.5"/>
+    <circle cx="26" cy="26" r="18" fill="none" stroke="#FFA94D" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <!-- Heart + Sprout / Leaf icon -->
+    <path d="M26 35 C20 30 14 24 14 18 C14 14 17 11 21 11 C23.5 11 25.2 12.3 26 13.8 C26.8 12.3 28.5 11 31 11 C35 11 38 14 38 18 C38 24 32 30 26 35 Z" fill="url(#ss-orange-grad-light)"/>
+    <!-- Sprout leaf emerging -->
+    <path d="M26 16 C27 10 33 8 36 9 C35 13 31 15 26 16 Z" fill="url(#ss-green-grad-light)"/>
+    <circle cx="26" cy="21" r="2.5" fill="#FFF9F0"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="68" y="34" font-family="'Poppins', sans-serif" font-weight="700" font-size="24" fill="#FFFFFF" letter-spacing="-0.5">Second<tspan fill="#FF922B">Serve</tspan></text>
+  <text x="69" y="49" font-family="'Inter', sans-serif" font-weight="600" font-size="9.5" fill="#51CF66" letter-spacing="2">FOOD WASTE RESCUE NGO</text>
+</svg>
