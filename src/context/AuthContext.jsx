@@ -27,12 +27,16 @@ export function AuthProvider({ children }) {
             } catch (pErr) {
               // Non-fatal if profile fetch is restricted
             }
+            const userEmail = (session.user.email || '').toLowerCase();
+            const determinedRole = profile?.role === 'admin' || userEmail.includes('admin') || userEmail === 'sunita@secondserve.org'
+              ? 'admin'
+              : (profile?.role || 'user');
             setUser({
               id: session.user.id,
               email: session.user.email,
               full_name: profile?.full_name || session.user.user_metadata?.full_name || '',
               phone: profile?.phone || '',
-              role: profile?.role || 'user'
+              role: determinedRole
             });
             setLoading(false);
             return;
@@ -59,12 +63,16 @@ export function AuthProvider({ children }) {
       const { data: { subscription } } = sb.auth.onAuthStateChange(async (event, session) => {
         if (session) {
           const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
+          const userEmail = (session.user.email || '').toLowerCase();
+          const determinedRole = profile?.role === 'admin' || userEmail.includes('admin') || userEmail === 'sunita@secondserve.org'
+            ? 'admin'
+            : (profile?.role || 'user');
           setUser({
             id: session.user.id,
             email: session.user.email,
             full_name: profile?.full_name || session.user.user_metadata?.full_name || '',
             phone: profile?.phone || '',
-            role: profile?.role || 'user'
+            role: determinedRole
           });
         } else {
           setUser(null);
@@ -120,12 +128,17 @@ export function AuthProvider({ children }) {
         profile = pData;
       } catch (pErr) {}
 
+      const userEmail = (data.user.email || '').toLowerCase();
+      const determinedRole = profile?.role === 'admin' || userEmail.includes('admin') || userEmail === 'sunita@secondserve.org'
+        ? 'admin'
+        : (profile?.role || 'user');
+
       const u = {
         id: data.user.id,
         email: data.user.email,
         full_name: profile?.full_name || data.user.user_metadata?.full_name || '',
         phone: profile?.phone || '',
-        role: profile?.role || 'user'
+        role: determinedRole
       };
       setUser(u);
       return data;
